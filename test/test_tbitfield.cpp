@@ -10,6 +10,7 @@ TEST(TBitField, can_create_bitfield_with_positive_length)
 TEST(TBitField, can_get_length)
 {
   TBitField bf(3);
+  //comment ?
 
   EXPECT_EQ(3, bf.GetLength());
 }
