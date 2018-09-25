@@ -102,24 +102,16 @@ TSet TSet::operator+(const TSet &s) // объединение
 TSet TSet::operator+(const int Elem) // объединение с элементом
 {
 	if (Elem < 0 || Elem > MaxPower) throw - 5;
-	TBitField _check_(MaxPower);
-	for (int i = 0; i < MaxPower; i++)
-	{
-		if (IsMember(i) || i == Elem)
-			_check_.SetBit(i);
-	}
+	TBitField _check_(BitField);
+	_check_.SetBit(Elem);
 	return _check_;
 }
 
 TSet TSet::operator-(const int Elem) // разность с элементом
 {
 	if (Elem < 0 || Elem > MaxPower) throw - 5;
-	TBitField _check_(MaxPower);
-	for (int i = 0; i < MaxPower; i++)
-	{
-		if (IsMember(i) && i != Elem)
-			_check_.SetBit(i);
-	}
+	TBitField _check_(BitField);//?
+	_check_.ClrBit(Elem);
 	return _check_;
 }
 
