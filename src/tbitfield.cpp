@@ -112,11 +112,20 @@ int TBitField::operator!=(const TBitField &bf) const // сравнение
 
 TBitField TBitField::operator|(const TBitField &bf) // операция "или"
 {
-	int length = (BitLen > bf.BitLen) ? BitLen : bf.BitLen;
-	TBitField check(length);
-	for (int i = 0; i < length; i++)
+	if (BitLen > bf.BitLen)
 	{
-		if (GetBit(i) == 1 || bf.GetBit(i) == 1)
+		TBitField check(BitLen);
+		for (int i = 0; i < BitLen; i++)
+		{
+			if (GetBit(i) == 1 || bf.GetBit(i) == 1)
+				check.SetBit(i);
+		}
+		return check;
+	}
+	TBitField check(bf.BitLen);
+	for (int i = 0; i < bf.BitLen; i++)
+	{
+		if (GetBit(i) == 1 ||bf.GetBit(i) == 1)
 			check.SetBit(i);
 	}
 	return check;
@@ -125,9 +134,18 @@ TBitField TBitField::operator|(const TBitField &bf) // операция "или"
 
 TBitField TBitField::operator&(const TBitField &bf) // операция "и"
 {
-	int length = (BitLen > bf.BitLen) ? BitLen : bf.BitLen;
-	TBitField check(length);
-	for (int i = 0; i < length; i++)
+	if (BitLen > bf.BitLen)
+	{
+		TBitField check(BitLen);
+		for (int i = 0; i < BitLen; i++)
+		{
+			if (GetBit(i) == 1 && bf.GetBit(i) == 1)
+				check.SetBit(i);
+		}
+		return check;
+	}
+	TBitField check(bf.BitLen);
+	for (int i = 0; i < bf.BitLen; i++)
 	{
 		if (GetBit(i) == 1 && bf.GetBit(i) == 1)
 			check.SetBit(i);
